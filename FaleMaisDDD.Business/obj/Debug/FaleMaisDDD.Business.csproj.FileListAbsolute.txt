@@ -1,0 +1,11 @@
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\EntityFramework.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Business.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Business.pdb
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Domain.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Infra.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Domain.pdb
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\FaleMaisDDD.Infra.pdb
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\bin\Debug\EntityFramework.xml
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\obj\Debug\FaleMaisDDD.Business.csprojResolveAssemblyReference.cache
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\obj\Debug\FaleMaisDDD.Business.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Business\obj\Debug\FaleMaisDDD.Business.pdb

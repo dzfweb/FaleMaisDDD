@@ -1,0 +1,10 @@
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.xml
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.dll.config
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.pdb
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.SqlServer.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.SqlServer.xml
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.csprojResolveAssemblyReference.cache
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.dll
+F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.pdb

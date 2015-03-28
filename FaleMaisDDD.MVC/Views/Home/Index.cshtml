@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Telzir";
+}
+
+
+<h3>Fale Mais Telzir</h3>
+<p>
+    Com o novo produto FaleMais da Telzir o cliente adquire um plano e pode falar de graça até um
+    determinado tempo (em minutos) e só paga os minutos excedentes. Os minutos excedentes
+    tem um acrescimo de 1 0% sobre a tarifa normal do minuto. Os planos são FaleMais 30 (30
+    minutos), FaleMais 60 (60 minutos) e FaleMais 1 20 (1 20 minutos).
+    A Telzir, preocupada com a transparência junto aos seus clientes, quer disponibilizar uma
+    página na web onde o cliente pode calcular o valor da ligação. Ali, o cliente pode escolher os
+    códigos das cidades de origem e destino, o tempo da ligação em minutos e escolher qual o
+    plano FaleMais. O sistema deve mostrar dois valores: (1 ) o valor da ligação com o plano e (2)
+    sem o plano. O custo inicial de aquisição do plano deve ser desconsiderado para este
+</p>
+
+
+<div class="row">
+    @{
+
+        int count = 0;
+        foreach (FaleMaisDDD.Domain.Entities.Plano item in ViewBag.Planos)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            @item.Descricao
+                        </h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor id tortor imperdiet ornare. Pellentesque vehicula facilisis tellus nec porta</p>
+                        <hr />
+
+                    </div>
+                    <div id="simulador-@count">
+                        <span id="retorno-mensagem-@count" style="margin-left:5px; color: red;"></span>
+                        <div class="caption img-rounded" style="background-color:#D9EDF7;">
+                            <form class="form-horizontal" id="form-item-@count">
+                                <div class="form-group">
+
+                                    <label for="planos-minutos-@count" class="col-sm-4 control-label">Contratado:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="planos-minutos-@count" value="@Math.Round(item.Minutos)" style="width:50px;" disabled>
+                                        <small>minutos</small>
+                                    </div>
+
+                                    <label for="planos-minutos-gastos-@count" class="col-sm-2 control-label">Gasto:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control number" id="planos-minutos-gastos-@count" style="width:50px;">
+                                        <small>minutos</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="origem-@count" class="col-sm-4 control-label">Origem:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control ddd" id="origem-@count" style="width:50px;">
+                                        <small>DDD</small>
+                                    </div>
+
+                                    <label for="destino-@count" class="col-sm-2 control-label">Destino:</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control ddd" id="destino-@count" style="width:50px;">
+                                        <small>DDD</small>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <hr />
+                        <div id="retorno-@count" style="display:none;">
+                            <table class="table">
+                                <tr>
+                                    <th><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Tempo</th>
+                                    <th><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Com FaleMais</th>
+                                    <th><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sem FaleMais</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        0
+                                    </td>
+                                    <td>
+                                        R$0,00
+                                    </td>
+                                    <td>
+                                        R$0,00
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <center>
+                        <button type="button" class="btn btn-success" aria-label="Left Align" onclick="js_SimularTarifa('@item.Id','@count')">
+                            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Simular Consumo
+                        </button>
+                    </center>
+                </div>
+            </div>
+            count++;
+        }
+    }
+
+</div>
+
+
+<script type="text/javascript">
+
+    $("document").ready(function () {
+        $(".number").mask("9999");
+        $(".ddd").mask("99");
+    });
+    function js_SimularTarifa(id, item) {
+        var tempo = $("#planos-minutos-gastos-" + item).val();
+        var origem = $("#origem-" + item).val();
+        var destino = $("#destino-" + item).val();
+
+        if(tempo.length < 1 &&
+            origem.length <3 &&
+            destino.length < 3) {
+
+            var n = noty({
+                text: "Preencha corretamente todos os campos",
+                type: "error",
+                closeWith: ['click'],
+                layout: "bottom"
+            });
+
+        }
+        else {
+            $("#simulador-" + item).block({ message: "Calculando..." });
+
+            var PedidoCalculo = {
+                PlanoID: id,
+                Tempo: tempo,
+                Origem: origem,
+                Destino: destino
+            };
+            $("#retorno-mensagem-" + item).html("");
+
+            $.ajax({
+                url: "@Url.Content("~/Home/Calcular")",
+                dataType: "JSON",
+                type: "POST",
+                data: PedidoCalculo,
+                success: function (retorno) {
+                    if (retorno.Detalhe.Sucesso) {
+
+                        $("#retorno-" + item).slideDown(1000);
+                        Math.round(retorno.Detalhe.ValorComPlano * Math.pow(10, 2)) / Math.pow(10, 2);
+                        $("#retorno-" + item).find("table").find("tr").last().find("td").eq(0).html(retorno.Detalhe.Tempo + "<small> min.</small>");
+                        $("#retorno-" + item).find("table").find("tr").last().find("td").eq(1).html("<strong>R$ " + Math.round(retorno.Detalhe.ValorComPlano * Math.pow(10, 2)) / Math.pow(10, 2) + "</strong>");
+                        $("#retorno-" + item).find("table").find("tr").last().find("td").eq(2).html("R$ " + Math.round(retorno.Detalhe.ValorSemPlano * Math.pow(10, 2)) / Math.pow(10, 2));
+
+                    }
+                    else {
+                        $("#retorno-mensagem-" + item).html("O DDD escolhido não faz parte do pacote.");
+                    }
+
+                },
+                complete: function () {
+                    $("#simulador-" + item).unblock();
+                }
+            });
+
+        }
+
+    }
+</script>

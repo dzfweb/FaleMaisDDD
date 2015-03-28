@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>FaleMais - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+    <!-- Bootstrap Core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet">
+
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.11.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.mask.min.js")"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+
+
+    <!-- Noty Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/noty-2.3.4/js/noty/packaged/jquery.noty.packaged.min.js")"></script>
+    <!-- BlockUI Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.blockUI.js")"></script>
+</head>
+<body>
+
+    <div id="body" class="container">
+        <div id="top"><a href="@Url.Content("~/Home")"><h3><span class="glyphicon glyphicon-globe" aria-hidden="true"> FaleMais.App</span></h3></a> </div>
+        <div class="panel panel-info">
+            <div class="panel-heading"><small> <a href="@Url.Content("~")">FaleMais.App</a> : @ViewBag.Title</small></div>
+            <div class="panel-body">
+                @RenderBody()
+            </div>
+        </div>
+
+        <center><small>@(User.Identity.IsAuthenticated ? Html.Raw("<a href=\"" + Url.Content("~/Admin/") + "\">(" + User.Identity.Name + ")</a> |  <a href=\"" + Url.Content("~/Admin/Logoff") + "\"> (Logoff)</a>") : Html.Raw("<a href=\"" + Url.Content("~/Admin/") + "\">(Login)</a>"))</small></center>
+        <center><small>Developed by <a href="http://www.dzfweb.com.br" target="_blank">DZF Web</a></small></center>
+    </div>
+
+</body>
+</html>
+
+
+
+

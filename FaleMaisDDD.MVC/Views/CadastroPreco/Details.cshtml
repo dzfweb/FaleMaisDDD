@@ -1,0 +1,50 @@
+﻿@model FaleMaisDDD.MVC.Models.ViewModels.PrecoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Preco</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origem.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origem.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorMinuto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorMinuto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

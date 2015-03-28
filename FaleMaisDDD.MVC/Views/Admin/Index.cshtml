@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Painel de Administração";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <!-- Não esta autenticado: Solicitar Login-->
+    Layout = null;
+    Html.RenderPartial("_Login");
+}
+else
+{
+    <!-- Esta autenticado: Exibir Dashboard -->
+    Html.RenderPartial("_DashBoard");
+}
+

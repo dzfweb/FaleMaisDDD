@@ -1,0 +1,86 @@
+﻿<html>
+<head>
+    <title>FaleMais - Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.11.2.min.js")"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Noty Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/noty-2.3.4/js/noty/packaged/jquery.noty.packaged.min.js")"></script>
+    <!-- BlockUI Plugin -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.blockUI.js")"></script>
+</head>
+<body>
+    <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <div class="account-wall">
+                    <div id="my-tab-content" class="tab-content">
+                        <div class="tab-pane active" id="login">
+                            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                                 alt="">
+                            <form class="form-signin" action="" method="">
+                                <input id="Login" name="Login" type="text" class="form-control" placeholder="Usuário" required autofocus>
+                                <input id="Senha" name="Senha" type="password" class="form-control" placeholder="Senha" required>
+                                <input id="btnLogin" type="button" class="btn btn-lg btn-default btn-block" value="Login" />
+                            </form>
+                            <div id="tabs" data-tabs="tabs">
+                                <p class="text-center"><a href="@Url.Content("~/Home")">Voltar ao Inicio</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+    $("#btnLogin").click(function () {
+        var login = $("#Login").val();
+        var pass = $("#Senha").val();
+
+        if (login.length > 1 && pass.length > 1) {
+            $.blockUI({ message: "Autenticando..." });
+
+            $.ajax({
+                url: "@Url.Content("~/Admin/Login")",
+                dataType: "JSON",
+                data: $("form").serialize(),
+                type: "POST",
+                success: function (retorno) {
+
+                    var n = noty({
+                        text: retorno.text,
+                        type: retorno.type,
+                        closeWith: ['click'],
+                        layout: "center"
+                    });
+                    if (retorno.type == "success") {
+                        window.location = "@Url.Content("~/Admin")";
+                    }
+                },
+                complete: function () {
+                    $.unblockUI();
+                }
+            })
+
+        }
+        else {
+            var n = noty({
+                text: 'Informe o seu e-mail e senha de acesso.',
+                type: "warning",
+                closeWith: ['click'],
+                layout: "center"
+            });
+        }
+    });
+        </script>
+    </div>
+</body>
+</html>
