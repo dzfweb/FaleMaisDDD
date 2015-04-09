@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Domain.Interfaces.Services
 {
-    public interface IPrecoService
+    public interface IPrecoService: IDataServiceBase<Preco>
     {
-        Preco BuscarPorId(Guid id);
-        IEnumerable<Preco> BuscarTodos();
-        void AdicionarNovo(Preco preco);
-        void Atualizar(Preco preco);
-        void Excluir(Preco preco);
+       
         Preco BuscarOrigemDestino(DDD origem, DDD destino);
     }
 }

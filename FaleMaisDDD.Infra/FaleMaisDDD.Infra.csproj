@@ -51,13 +51,14 @@
     <Compile Include="Data\Map\PrecoMap.cs" />
     <Compile Include="Data\Map\PlanoMap.cs" />
     <Compile Include="Data\Map\AdministradorMap.cs" />
-    <Compile Include="Migrations\201503252338074_InitialCreate.cs" />
-    <Compile Include="Migrations\201503252338074_InitialCreate.Designer.cs">
-      <DependentUpon>201503252338074_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504080017508_initialcreate.cs" />
+    <Compile Include="Migrations\201504080017508_initialcreate.Designer.cs">
+      <DependentUpon>201504080017508_initialcreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdministradorRepository.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\DDDRepository.cs" />
     <Compile Include="Repositories\PlanoRepository.cs" />
     <Compile Include="Repositories\PrecoRepository.cs" />
@@ -73,8 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503252338074_InitialCreate.resx">
-      <DependentUpon>201503252338074_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504080017508_initialcreate.resx">
+      <DependentUpon>201504080017508_initialcreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,40 +9,20 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Business.Services
 {
-    public class PrecoService : IPrecoService
+    public class PrecoService : DataServiceBase<Preco>, IPrecoService
     {
-        private IPrecoRepository _repository;
-        public PrecoService(IPrecoRepository _repository)
+        
+        private IUnitOfWorkService _uow;
+        private IPrecoRepository _precoRepository;
+        public PrecoService(UnitOfWorkService uow)
+            : base(uow)
         {
-            this._repository = _repository;
-        }
-        public Preco BuscarPorId(Guid id)
-        {
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<Preco> BuscarTodos()
-        {
-            return _repository.GetAll();
-        }
-
-        public void AdicionarNovo(Preco preco)
-        {
-            _repository.Add(preco);
-        }
-
-        public void Atualizar(Preco preco)
-        {
-            _repository.Update(preco);
-        }
-
-        public void Excluir(Preco preco)
-        {
-            _repository.Remove(preco);
+            this._uow = uow;
+            this._precoRepository = uow.Repository<IPrecoRepository>();
         }
         public Preco BuscarOrigemDestino(DDD origem, DDD destino)
         {
-            return _repository.GetAll().Where(p => p.IdDestino == destino.Id && p.IdOrigem == origem.Id).FirstOrDefault();
+            return _precoRepository.GetAll().Where(p => p.IdDestino == destino.Id && p.IdOrigem == origem.Id).FirstOrDefault();
         }
     }
 }

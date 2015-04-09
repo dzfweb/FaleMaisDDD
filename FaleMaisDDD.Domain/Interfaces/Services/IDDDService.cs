@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Domain.Interfaces.Services
 {
-    public interface IDDDService
+    public interface IDDDService : IDataServiceBase<DDD>
     {
-        DDD BuscarPorId(Guid id);
-        IEnumerable<DDD> BuscarTodos();
-        IEnumerable<DDD> BuscarTodosAtivos();
-        void AdicionarNovo(DDD ddd);
-        void Atualizar(DDD ddd);
-        void Excluir(DDD ddd);
+        IEnumerable<DDD> Ativos();
     }
 }

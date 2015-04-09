@@ -18,17 +18,19 @@ namespace FaleMaisDDD.MVC.Controllers
     public class CadastroPlanoController : Controller
     {
        private IPlanoService db;
+       private IUnitOfWorkService _uow;
 
-        public CadastroPlanoController(IPlanoService repository)
+        public CadastroPlanoController(IUnitOfWorkService uow)
         {
-            this.db = repository;
+            this._uow = uow;
+            this.db = uow.Service<IPlanoService>();
         }
 
         // GET: CadastroPlano
         public ActionResult Index()
         {
             var listView = new List<PlanoViewModel>();
-            db.BuscarTodos().ToList().ForEach(el => listView.Add( Mapper.Map<Plano, PlanoViewModel>(el) ));
+            db.GetAll().ToList().ForEach(el => listView.Add( Mapper.Map<Plano, PlanoViewModel>(el) ));
             return View(listView);
         }
 
@@ -39,7 +41,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plano plano = db.BuscarPorId(id.Value);
+            Plano plano = db.Get(p => p.Id == id.Value);
             if (plano == null)
             {
                 return HttpNotFound();
@@ -63,7 +65,8 @@ namespace FaleMaisDDD.MVC.Controllers
             if (ModelState.IsValid)
             {
                 plano.Id = Guid.NewGuid();
-                db.AdicionarNovo(Mapper.Map<PlanoViewModel, Plano>(plano));
+                db.Add(Mapper.Map<PlanoViewModel, Plano>(plano));
+                _uow.Commit();                 
                 return RedirectToAction("Index");
             }
 
@@ -77,7 +80,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plano plano = db.BuscarPorId(id.Value);
+            Plano plano = db.Get(p => p.Id == id.Value);
             if (plano == null)
             {
                 return HttpNotFound();
@@ -94,7 +97,8 @@ namespace FaleMaisDDD.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Atualizar(Mapper.Map<PlanoViewModel,Plano>(plano));
+                db.Update(Mapper.Map<PlanoViewModel,Plano>(plano));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(plano);
@@ -107,7 +111,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plano plano = db.BuscarPorId(id.Value);
+            Plano plano = db.Get(p => p.Id == id.Value);
             if (plano == null)
             {
                 return HttpNotFound();
@@ -120,8 +124,9 @@ namespace FaleMaisDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Plano plano = db.BuscarPorId(id);
-            db.Excluir(plano);
+            Plano plano = db.Get(p => p.Id == id);
+            db.Remove(plano);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 

@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Domain.Interfaces.Services
 {
-    public interface IPlanoService
+    public interface IPlanoService : IDataServiceBase<Plano>
     {
-        Plano BuscarPorId(Guid id);
-        IEnumerable<Plano> BuscarTodos();
-        void AdicionarNovo(Plano plano);
-        void Atualizar(Plano plano);
-        void Excluir(Plano plano);
+       
     }
 }

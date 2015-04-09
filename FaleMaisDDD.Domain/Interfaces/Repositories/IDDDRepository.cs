@@ -9,5 +9,6 @@ namespace FaleMaisDDD.Domain.Interfaces.Repositories
 {
     public interface IDDDRepository : IBaseRepository<DDD>
     {
+        IEnumerable<DDD> Ativos();
     }
 }

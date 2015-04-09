@@ -9,45 +9,16 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Infra.Repositories
 {
-    public class DDDRepository : IDDDRepository
+    public class DDDRepository : BaseRepository<DDD>, IDDDRepository
     {
-        private DataContext _context;
+        public DDDRepository(DataContext db)
+            :base(db)
+        {
 
-        public DDDRepository(DataContext context)
-        {
-            this._context = context;
         }
-        public void Add(DDD obj)
+        public IEnumerable<DDD> Ativos()
         {
-            _context.DDDs.Add(obj);
-            _context.SaveChanges();
-        }
-
-        public DDD GetById(Guid id)
-        {
-            return _context.DDDs.FirstOrDefault(p => p.Id == id);
-        }
-
-        public IEnumerable<DDD> GetAll()
-        {
-            return _context.DDDs.ToList();
-        }
-
-        public void Update(DDD obj)
-        {
-            _context.Entry<DDD>(obj).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
-        }
-
-        public void Remove(DDD obj)
-        {
-            _context.DDDs.Remove(obj);
-            _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
+            return db.DDDs.Where(p => p.Ativo);
         }
     }
 }

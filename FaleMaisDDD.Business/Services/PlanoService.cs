@@ -9,36 +9,13 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Business.Services
 {
-    public class PlanoService: IPlanoService
+    public class PlanoService : DataServiceBase<Plano>, IPlanoService
     {
-        private IPlanoRepository _repository;
-        public PlanoService(IPlanoRepository repository)
+        private IUnitOfWorkService _uow;
+        public PlanoService(UnitOfWorkService uow)
+            : base(uow)
         {
-            this._repository = repository;
-        }
-        public Plano BuscarPorId(Guid id)
-        {
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<Plano> BuscarTodos()
-        {
-            return _repository.GetAll();
-        }
-
-        public void AdicionarNovo(Plano plano)
-        {
-            _repository.Add(plano);
-        }
-
-        public void Atualizar(Plano plano)
-        {
-            _repository.Update(plano);
-        }
-
-        public void Excluir(Plano plano)
-        {
-            _repository.Remove(plano);
+             this._uow = uow;
         }
     }
 }

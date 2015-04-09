@@ -9,10 +9,12 @@ namespace FaleMaisDDD.Domain.Interfaces.Repositories
     public interface IBaseRepository<TEntity> where TEntity : class
     {
         void Add(TEntity obj);
-        TEntity GetById(Guid id);
+        
         IEnumerable<TEntity> GetAll();
         void Update(TEntity obj);
         void Remove(TEntity obj);
+        IEnumerable<TEntity> Find(Func<TEntity, bool> expr);
+        TEntity Get(Func<TEntity, bool> expr);
         void Dispose();
     }
 }

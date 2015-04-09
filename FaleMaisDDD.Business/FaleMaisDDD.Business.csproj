@@ -30,7 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,11 +50,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdministradorService.cs" />
     <Compile Include="Services\CalculoService.cs" />
+    <Compile Include="Services\DataServiceBase.cs" />
     <Compile Include="Services\DDDService.cs" />
     <Compile Include="Services\PlanoService.cs" />
     <Compile Include="Services\PrecoService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\UnitOfWorkService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FaleMaisDDD.Domain\FaleMaisDDD.Domain.csproj">
       <Project>{cc87c9f4-f5a4-484f-9728-3ec815d8a12b}</Project>

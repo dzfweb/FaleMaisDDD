@@ -9,40 +9,21 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Business.Services
 {
-    public class AdministradorService : IAdministradorService
+    public class AdministradorService : DataServiceBase<Administrador>, IAdministradorService
     {
-        private IAdministradorRepository _repository;
-        public AdministradorService(IAdministradorRepository repository)
+        private IUnitOfWorkService _uow;
+        private IAdministradorRepository _administradorRepository;
+
+        public AdministradorService(UnitOfWorkService uow)
+            : base(uow)
         {
-            this._repository = repository;
-        }
-        public Administrador BuscarPorId(Guid id)
-        {
-            return _repository.GetById(id);
+             this._uow = uow;
+             this._administradorRepository = uow.Repository<IAdministradorRepository>();
         }
 
-        public IEnumerable<Administrador> BuscarTodos()
-        {
-            return _repository.GetAll();
-        }
-
-        public void AdicionarNovo(Administrador administrador)
-        {
-            _repository.Add(administrador);
-        }
-
-        public void Atualizar(Administrador administrador)
-        {
-            _repository.Update(administrador);
-        }
-
-        public void Excluir(Administrador administrador)
-        {
-            _repository.Remove(administrador);
-        }
         public bool Autenticar(string login, string senha)
         {
-            return _repository.GetByLoginAndPass(login, senha) != null;
+            return _administradorRepository.Find(p => p.Login == login && p.Senha == senha && p.Ativo).Any();
         }
     }
 }

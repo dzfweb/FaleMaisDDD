@@ -12,3 +12,17 @@ F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\F
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.csproj.GenerateResource.Cache
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.dll
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.csprojResolveAssemblyReference.cache
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\FaleMaisDDD.Infra.dll.config
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\FaleMaisDDD.Infra.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\FaleMaisDDD.Infra.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\EntityFramework.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\FaleMaisDDD.Domain.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\FaleMaisDDD.Domain.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\EntityFramework.xml
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.Migrations.initialcreate.resources
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Infra\obj\Debug\FaleMaisDDD.Infra.csproj.GenerateResource.Cache

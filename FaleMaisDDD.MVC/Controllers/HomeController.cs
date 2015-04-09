@@ -16,14 +16,13 @@ namespace FaleMaisDDD.MVC.Controllers
         // GET: /Home/
         private IPlanoRepository _repository;
         private ICalculoService _service;
+        private IUnitOfWorkService _uow;
 
-        public HomeController(
-            IPlanoRepository repository,
-            ICalculoService service
-            )
+        public HomeController(IUnitOfWorkService uow)
         {
-            this._repository = repository;
-            this._service = service;
+            this._uow = uow;
+            this._repository = uow.Repository<IPlanoRepository>();
+            this._service = uow.Service<ICalculoService>();
         }
 
         public ActionResult Index()

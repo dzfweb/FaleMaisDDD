@@ -8,3 +8,13 @@ F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.csprojResolveAssemblyReference.cache
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.dll
 F:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.dll.config
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\FaleMaisDDD.Domain.pdb
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.xml
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.csprojResolveAssemblyReference.cache
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.dll
+D:\Projetos\Vizir\FaleMais\FaleMaisDDD\FaleMaisDDD\FaleMaisDDD.Domain\obj\Debug\FaleMaisDDD.Domain.pdb

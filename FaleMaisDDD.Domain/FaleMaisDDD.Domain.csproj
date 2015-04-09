@@ -57,9 +57,12 @@
     <Compile Include="Interfaces\Repositories\IPrecoRepository.cs" />
     <Compile Include="Interfaces\Services\IAdministradorService.cs" />
     <Compile Include="Interfaces\Services\ICalculoService.cs" />
+    <Compile Include="Interfaces\Services\IDataServiceBase.cs" />
     <Compile Include="Interfaces\Services\IDDDService.cs" />
     <Compile Include="Interfaces\Services\IPlanoService.cs" />
     <Compile Include="Interfaces\Services\IPrecoService.cs" />
+    <Compile Include="Interfaces\Services\IServiceBase.cs" />
+    <Compile Include="Interfaces\Services\IUnitOfWorkService.cs" />
     <Compile Include="Models\DetalheResultado.cs" />
     <Compile Include="Models\PedidoCalculo.cs" />
     <Compile Include="Models\ResultadoCalculo.cs" />

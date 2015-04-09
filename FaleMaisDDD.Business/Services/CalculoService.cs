@@ -10,27 +10,27 @@ using FaleMaisDDD.Domain.Entities;
 
 namespace FaleMaisDDD.Business.Services
 {
-    public class CalculoService : ICalculoService
+    public class CalculoService : ServiceBase, ICalculoService
     {
         private IPlanoService _planoService;
         private IPrecoService _precoService;
         private IDDDService _dddService;
+        private IUnitOfWorkService _uow;
 
-        public CalculoService(
-            IPlanoService planoService,
-            IPrecoService precoService,
-            IDDDService dddService)
+        public CalculoService(IUnitOfWorkService uow)  
+            : base(uow)
         {
-            this._dddService = dddService;
-            this._planoService = planoService;
-            this._precoService = precoService;
+            this._uow = uow;
+            this._dddService = uow.Service<IDDDService>();
+            this._planoService = uow.Service<IPlanoService>();;
+            this._precoService = uow.Service<IPrecoService>();
         }
         public ResultadoCalculo CalcularValores(PedidoCalculo pedido)
         {
             var resultado = new ResultadoCalculo();
 
-            var listDDD = _dddService.BuscarTodosAtivos();
-            var objPlano = _planoService.BuscarPorId(pedido.PlanoID);
+            var listDDD = _dddService.Ativos();
+            var objPlano = _planoService.Find(p => p.Id == pedido.PlanoID).FirstOrDefault();
             var objOrigem = listDDD.Where(p => p.Codigo == pedido.Origem).FirstOrDefault() ?? new DDD();
             var objDestino = listDDD.Where(p => p.Codigo == pedido.Destino).FirstOrDefault() ?? new DDD();
             var objPreco = _precoService.BuscarOrigemDestino(objOrigem, objDestino);

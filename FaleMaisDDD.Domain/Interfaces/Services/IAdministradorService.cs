@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Domain.Interfaces.Services
 {
-    public interface IAdministradorService
+    public interface IAdministradorService : IDataServiceBase<Administrador>
     {
-        Administrador BuscarPorId(Guid id);
-        IEnumerable<Administrador> BuscarTodos();
-        void AdicionarNovo(Administrador administrador);
-        void Atualizar(Administrador administrador);
-        void Excluir(Administrador administrador);
         bool Autenticar(string login, string senha);
     }
 }

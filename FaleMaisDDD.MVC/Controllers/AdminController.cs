@@ -13,9 +13,11 @@ namespace FaleMaisDDD.MVC.Controllers
     public class AdminController : Controller
     {
         private IAdministradorService _service;
-        public AdminController(IAdministradorService service)
+        private IUnitOfWorkService _uow;
+        public AdminController(IUnitOfWorkService uow)
         {
-            this._service = service;
+            this._uow = uow;
+            this._service = uow.Service<IAdministradorService>();
         }
         // GET: Admin
         public ActionResult Index()

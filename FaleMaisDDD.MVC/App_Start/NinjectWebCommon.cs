@@ -49,16 +49,18 @@ namespace FaleMaisDDD.MVC.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IAdministradorRepository>().To<AdministradorRepository>();
-                kernel.Bind<DataContext>().To<DataContext>();
-                kernel.Bind<IPlanoRepository>().To<PlanoRepository>();
-                kernel.Bind<IPrecoRepository>().To<PrecoRepository>();
-                kernel.Bind<IDDDRepository>().To<DDDRepository>();
-                kernel.Bind<ICalculoService>().To<CalculoService>();
-                kernel.Bind<IPlanoService>().To<PlanoService>();
-                kernel.Bind<IPrecoService>().To<PrecoService>();
-                kernel.Bind<IDDDService>().To<DDDService>();
-                kernel.Bind<IAdministradorService>().To<AdministradorService>();
+                //kernel.Bind<IAdministradorRepository>().To<AdministradorRepository>();
+                //kernel.Bind<DataContext>().To<DataContext>();
+                //kernel.Bind<IPlanoRepository>().To<PlanoRepository>();
+                //kernel.Bind<IPrecoRepository>().To<PrecoRepository>();
+                //kernel.Bind<IDDDRepository>().To<DDDRepository>();
+                //kernel.Bind<ICalculoService>().To<CalculoService>();
+                //kernel.Bind<IPlanoService>().To<PlanoService>();
+                //kernel.Bind<IPrecoService>().To<PrecoService>();
+                //kernel.Bind<IDDDService>().To<DDDService>();
+                //kernel.Bind<IAdministradorService>().To<AdministradorService>();
+
+                kernel.Bind<IUnitOfWorkService>().To<UnitOfWorkService>();
 
                 RegisterServices(kernel);
                 return kernel;

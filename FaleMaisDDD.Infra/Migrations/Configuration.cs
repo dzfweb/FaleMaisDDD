@@ -9,7 +9,7 @@ namespace FaleMaisDDD.Infra.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(FaleMaisDDD.Infra.Data.DataContext context)

@@ -19,18 +19,22 @@ namespace FaleMaisDDD.MVC.Controllers
     {
         private IPrecoService db;
         private IDDDService dbDDD;
+        private IUnitOfWorkService _uow;
 
-        public CadastroPrecoController(IPrecoService repository, IDDDService repositoryDDD)
+        public CadastroPrecoController(IUnitOfWorkService uow)
         {
-            this.db = repository;
-            this.dbDDD = repositoryDDD;
+            this._uow = uow;
+            this.db = uow.Service<IPrecoService>();
+            this.dbDDD = uow.Service<IDDDService>();
+
         }
 
         // GET: CadastroPreco
         public ActionResult Index()
         {
            var listView = new List<PrecoViewModel>();
-            db.BuscarTodos().ToList().ForEach(el => listView.Add(Mapper.Map<Preco, PrecoViewModel>(el) ));
+            db.GetAll().ToList().ForEach(el => listView.Add(Mapper.Map<Preco, PrecoViewModel>(el) ));
+            _uow.Commit();
             return View(listView);
         }
 
@@ -41,7 +45,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Preco preco = db.BuscarPorId(id.Value);
+            Preco preco = db.Get(p => p.Id == id.Value);
             if (preco == null)
             {
                 return HttpNotFound();
@@ -52,8 +56,8 @@ namespace FaleMaisDDD.MVC.Controllers
         // GET: CadastroPreco/Create
         public ActionResult Create()
         {
-            ViewBag.IdDestino = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo");
-            ViewBag.IdOrigem = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo");
+            ViewBag.IdDestino = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo");
+            ViewBag.IdOrigem = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo");
             return View();
         }
 
@@ -67,12 +71,13 @@ namespace FaleMaisDDD.MVC.Controllers
             if (ModelState.IsValid)
             {
                 preco.Id = Guid.NewGuid();
-                db.AdicionarNovo(Mapper.Map<PrecoViewModel, Preco>(preco));
+                db.Add(Mapper.Map<PrecoViewModel, Preco>(preco));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdDestino = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
-            ViewBag.IdOrigem = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
+            ViewBag.IdDestino = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
+            ViewBag.IdOrigem = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
             return View(preco);
         }
 
@@ -83,13 +88,13 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Preco preco = db.BuscarPorId(id.Value);
+            Preco preco = db.Get(p => p.Id == id.Value);
             if (preco == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdDestino = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
-            ViewBag.IdOrigem = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
+            ViewBag.IdDestino = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
+            ViewBag.IdOrigem = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
             return View(Mapper.Map<Preco,PrecoViewModel>(preco));
         }
 
@@ -102,11 +107,12 @@ namespace FaleMaisDDD.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Atualizar(Mapper.Map<PrecoViewModel, Preco>(preco));
+                db.Update(Mapper.Map<PrecoViewModel, Preco>(preco));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdDestino = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
-            ViewBag.IdOrigem = new SelectList(dbDDD.BuscarTodos().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
+            ViewBag.IdDestino = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdDestino);
+            ViewBag.IdOrigem = new SelectList(dbDDD.GetAll().Where(p => p.Ativo), "Id", "Codigo", preco.IdOrigem);
             return View(preco);
         }
 
@@ -117,7 +123,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Preco preco = db.BuscarPorId(id.Value);
+            Preco preco = db.Get(p => p.Id == id.Value);
             if (preco == null)
             {
                 return HttpNotFound();
@@ -130,8 +136,9 @@ namespace FaleMaisDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Preco preco = db.BuscarPorId(id);
-            db.Excluir(preco);
+            Preco preco = db.Get(p => p.Id == id);
+            db.Remove(preco);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 

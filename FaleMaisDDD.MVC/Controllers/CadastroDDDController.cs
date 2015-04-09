@@ -18,16 +18,19 @@ namespace FaleMaisDDD.MVC.Controllers
     public class CadastroDDDController : Controller
     {
         private IDDDService db;
-        public CadastroDDDController(IDDDService repository)
+        private IUnitOfWorkService _uow;
+        public CadastroDDDController(IUnitOfWorkService uow)
+            
         {
-            this.db = repository;
+            this._uow = uow;
+            db = uow.Service<IDDDService>();
         }
 
         // GET: CadastroDDD
         public ActionResult Index()
         {
            var listView = new List<DDDViewModel>();
-            db.BuscarTodos().ToList().ForEach(el => listView.Add(Mapper.Map<DDD, DDDViewModel>(el)));
+            db.Ativos().ToList().ForEach(el => listView.Add(Mapper.Map<DDD, DDDViewModel>(el)));
             return View(listView);
         }
 
@@ -38,7 +41,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DDD dDD = db.BuscarPorId(id.Value);
+            DDD dDD = db.Find(p => p.Id == id).FirstOrDefault();
             if (dDD == null)
             {
                 return HttpNotFound();
@@ -62,7 +65,8 @@ namespace FaleMaisDDD.MVC.Controllers
             if (ModelState.IsValid)
             {
                 dDD.Id = Guid.NewGuid();
-                db.AdicionarNovo(Mapper.Map<DDDViewModel,DDD>(dDD));
+                db.Add(Mapper.Map<DDDViewModel,DDD>(dDD));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +80,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DDD dDD = db.BuscarPorId(id.Value);
+            DDD dDD = db.Find(p => p.Id == id.Value).FirstOrDefault();
             if (dDD == null)
             {
                 return HttpNotFound();
@@ -93,7 +97,8 @@ namespace FaleMaisDDD.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Atualizar(Mapper.Map<DDDViewModel, DDD>(dDD));
+                db.Update(Mapper.Map<DDDViewModel, DDD>(dDD));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(dDD);
@@ -106,7 +111,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DDD dDD = db.BuscarPorId(id.Value);
+            DDD dDD = db.Find(p => p.Id == id.Value).FirstOrDefault();
             if (dDD == null)
             {
                 return HttpNotFound();
@@ -119,8 +124,9 @@ namespace FaleMaisDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            DDD dDD = db.BuscarPorId(id);
-            db.Excluir(dDD);
+            DDD dDD = db.Find(p => p.Id == id).FirstOrDefault();
+            db.Remove(dDD);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 

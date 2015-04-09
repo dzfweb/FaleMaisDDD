@@ -9,43 +9,19 @@ using System.Threading.Tasks;
 
 namespace FaleMaisDDD.Business.Services
 {
-    public class DDDService : IDDDService
+    public class DDDService : DataServiceBase<DDD>, IDDDService
     {
-        private IDDDRepository _repository;
-
-        public DDDService(IDDDRepository repository)
+        private IUnitOfWorkService _uow;
+        private IDDDRepository _dddRepository;
+        public DDDService(UnitOfWorkService uow)
+            : base(uow)
         {
-            this._repository = repository;
+             this._uow = uow;
+             this._dddRepository = uow.Repository<IDDDRepository>();
         }
-
-        public DDD BuscarPorId(Guid id)
+        public IEnumerable<DDD> Ativos()
         {
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<DDD> BuscarTodos()
-        {
-            return _repository.GetAll();
-        }
-
-        public IEnumerable<DDD> BuscarTodosAtivos()
-        {
-            return _repository.GetAll().Where(p => p.Ativo);
-        }
-
-        public void AdicionarNovo(DDD ddd)
-        {
-            _repository.Add(ddd);
-        }
-
-        public void Atualizar(DDD ddd)
-        {
-            _repository.Update(ddd);
-        }
-
-        public void Excluir(DDD ddd)
-        {
-            _repository.Remove(ddd);
+            return _dddRepository.Ativos();
         }
     }
 }

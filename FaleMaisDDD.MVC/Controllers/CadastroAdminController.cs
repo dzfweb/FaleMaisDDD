@@ -18,17 +18,19 @@ namespace FaleMaisDDD.MVC.Controllers
     public class CadastroAdminController : Controller
     {
         private IAdministradorService db;
+        private IUnitOfWorkService _uow;
 
-        public CadastroAdminController(IAdministradorService repository)
+        public CadastroAdminController(IUnitOfWorkService uow)
         {
-            this.db = repository;
+            this._uow = uow;
+            this.db = uow.Service<IAdministradorService>();
         }
 
         // GET: CadastroAdmin
         public ActionResult Index()
         {   
             var listView = new List<AdministradorViewModel>();
-            db.BuscarTodos().ToList().ForEach(el => listView.Add( Mapper.Map<Administrador, AdministradorViewModel>(el) ));
+            db.GetAll().ToList().ForEach(el => listView.Add( Mapper.Map<Administrador, AdministradorViewModel>(el) ));
             return View(listView);
         }
 
@@ -39,7 +41,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Administrador administrador = db.BuscarPorId(id.Value);
+            Administrador administrador = db.Get(p => p.Id == id.Value);
             if (administrador == null)
             {
                 return HttpNotFound();
@@ -63,7 +65,8 @@ namespace FaleMaisDDD.MVC.Controllers
             if (ModelState.IsValid)
             {
                 administrador.Id = Guid.NewGuid();
-                db.AdicionarNovo(Mapper.Map<AdministradorViewModel, Administrador>(administrador));
+                db.Add(Mapper.Map<AdministradorViewModel, Administrador>(administrador));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -77,7 +80,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Administrador administrador = db.BuscarPorId(id.Value);
+            Administrador administrador = db.Get(p => p.Id == id.Value);
             if (administrador == null)
             {
                 return HttpNotFound();
@@ -94,7 +97,8 @@ namespace FaleMaisDDD.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Atualizar(Mapper.Map<AdministradorViewModel, Administrador>(administrador));
+                db.Update(Mapper.Map<AdministradorViewModel, Administrador>(administrador));
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(administrador);
@@ -107,7 +111,7 @@ namespace FaleMaisDDD.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           Administrador administrador = db.BuscarPorId(id.Value);
+           Administrador administrador = db.Get(p => p.Id == id.Value);
             if (administrador == null)
             {
                 return HttpNotFound();
@@ -120,8 +124,9 @@ namespace FaleMaisDDD.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Administrador administrador = db.BuscarPorId(id);
-            db.Excluir(administrador);
+            Administrador administrador = db.Get(p => p.Id == id);
+            db.Remove(administrador);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 
